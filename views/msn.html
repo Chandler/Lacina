@@ -1,0 +1,25 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<title>Text Messages</title>
+		<div id="pie" ></div>
+		<div id="graph" ></div>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		var chart;
+		jQuery(function() {
+			Highcharts.setOptions(general_options);
+			chart = new Highcharts.Chart(pie_options);
+			window.chart = new Highcharts.StockChart(main_options);
+		});
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript" src="../lib/highstock_js/highstock.js"></script>
+		<script type="text/javascript" src="../lib/highstock_js/modules/exporting.js"></script>
+		<script type="text/javascript" src="../jsdata/msn/msn.js"></script>
+	</body>
+</html>

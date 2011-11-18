@@ -1,0 +1,66 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<title>Highstock Example</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+		<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/plugins/autocomplete/demo/main.css" type="text/css" />
+		<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.css" type="text/css" />
+		<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/lib/jquery.bgiframe.min.js"></script>
+		<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/lib/jquery.dimensions.js"></script>
+		<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.js"></script>
+		<script>
+
+		$(document).ready(function(){
+		var data = contactString.split(" ");
+		$("#example").autocomplete(data);
+		});
+
+
+		function loadJS(file) {
+
+			form =  document.personal.name.value;
+			var path = "jsdata/single/" + form;
+			// DOM: Create the script element
+			var jsElm = document.createElement("script");
+			jsElm.id = "current";
+			// set the type attribute
+			jsElm.type = "application/javascript";
+			// make the script element load file
+			jsElm.src = path;
+			// finally insert the element to the body element in order to load the script
+			document.body.replaceChild(jsElm);
+			loadGraph();
+		}
+
+		function loadGraph(){
+			var chart;
+			jQuery(function() {
+				Highcharts.setOptions(general_options);
+				window.chart = new Highcharts.StockChart(main_options);
+			});
+		}
+		</script>
+		
+
+		
+	</head>
+	<body>
+		<div>
+		<form name="personal">
+		<input type="text" name ="name" id ="example" />
+		<input type="BUTTON" OnClick = "loadJS()">
+		</div>
+		</form>
+  		<div id="graph" ></div>
+		
+	</body>
+		<script type="text/javascript" src="highstock_js/highstock.js"></script>
+		<script type="text/javascript" src="highstock_js/modules/exporting.js"></script>
+		<script type="text/javascript" src="jsdata/single/single.js"></script>
+
+</html>
