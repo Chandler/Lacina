@@ -40,45 +40,43 @@ class DataStore {
 
      public function parse_skype($log_location, $contact_list){        
         ini_set('memory_limit', '-1');
+        $my_skype_handle = "cbabraham";
         if (($handle = fopen($log_location, "r")) !== FALSE) {
             while (($data = fgetcsv($handle,",")) !== FALSE) {
                 $username = $data[3];
                 $log = $data[7];
                 list($space, $left_name, $space, $right_name, $database) = split('[#/$;]', $log);
 
-                if($left_name == "cbabraham"){
+                if($left_name == $my_skype_handle){
                     $log_name = $right_name;
                 }
                 else{
                     $log_name = $left_name;
                 }
 
-                if($username == $log_name || $username == "cbabraham"){
-                    $new_message = new Message();
-                    $new_message->date_stamp = strtotime($data[2])*1000;
-                    $new_message->message_contents = $data[6];
+                if(!is_numeric($log_name[0])){ //filter out group chats, they have numeric log names instead of usernames
+                    if($username == $log_name || $username == $my_skype_handle){
+                        $new_message = new Message();
+                        $new_message->date_stamp = strtotime($data[2])*1000;
+                        $new_message->message_contents = $data[6];
                     
-                    
-                    if($data[3] == "cbabraham"){
-                        $new_message->to = "contact";
-                        $new_message->from = "me";
-                    }
-                    else{
-                        $new_message->to = "me";
-                        $new_message->from = "contact";
-                    }
-                    if($new_message->message_contents != ""){
-                        $contact_list->new_message($log_name, $new_message);
+                        if($data[3] == $my_skype_handle){
+                            $new_message->to = "contact";
+                            $new_message->from = "me";
+                        }
+                        else{
+                            $new_message->to = "me";
+                            $new_message->from = "contact";
+                        }
+                        if($new_message->message_contents != ""){
+                            $contact_list->new_message($log_name, $new_message);
+                        }
                     }
                 }
-
             }
             fclose($handle);
         }
-
-
-
-        print("Done parsing Google Voice logs\n");
+        print("Done parsing Skype logs \n");
     }
     
     public function parse_google_voice($log_location, $contact_list){

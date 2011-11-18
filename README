@@ -1,0 +1,9 @@
+This script parses various messaging history files and graphs messages over time.
+So far it can parse: 
+	Google Voice Takeout
+	Skype History converted to CVS using http://www.nirsoft.net/utils/skype_log_view.html
+	MSN messanger version I-have-no-idea xml history files.
+
+Facebook Message/Chat archives are a work in progress.
+
+

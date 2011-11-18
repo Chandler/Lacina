@@ -1,8 +1,8 @@
 <?php
 class Charts{
 
-    //==========================================================================
-    // Options for the primary graph and piechart page. Works with sms, calls, skype, msn and fb
+//==========================================================================
+// Options for the primary graph and piechart page. Works with sms, calls, skype, msn and fb
 
     public function write_chart_options($graph_data, $n, $location, $filename){
         $general_options = $this->general_options();
@@ -89,7 +89,9 @@ class Charts{
                 
         $options["chart"] = $chart;
         $options["rangeSelector"] = $rangeSelector;
+        $options["title"] = $title;
         $options["xAxis"] = $xAxis;
+        $options["yAxis"] = $yAxis;
         $options["legend"] = $legend;
         $options["plotOptions"] = $plotOptions;
 
@@ -99,13 +101,13 @@ class Charts{
             $name = $graph_data[$i][0]->contact_name;
             $tok = explode(" ",$name);
             $varname = $tok[0]. "_". $tok[1];
-            $varname = str_replace(".", "_", $varname);
             $series["name"] = "'$name'";
             $series["data"] = $varname;
             // $series["type"] = "'area'";
             // $series["stack"] = "1";
-            
+
             $options["series"][] = $series;
+            
             $data_string .= $this->generate_javascript_array($varname, $graph_data[$i][1]);
         }
             
@@ -191,8 +193,8 @@ class Charts{
         file_put_contents($file, $final_string);    
     }
 
-    //==========================================================================
-    // Options for single contact chart. Works with sms
+//==========================================================================
+// Options for single contact chart. Works with sms
 
     public function write_single_contact_options($graph_data, $n, $location){
         mkdir($location);
