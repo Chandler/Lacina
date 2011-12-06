@@ -40,7 +40,7 @@ class Contact{
 	    return $this->message_count;
 	}
 
-    public function get_message_timestamps(){
+    	public function get_message_timestamps(){
 	    return $this->return_timestamps($this->all_messages);
 	}
 
